@@ -26,16 +26,14 @@ const addComment = async (req, res) => {
     const { data, error } = await supabase
       .from("blogs")
       .update({ comments: newComments })
-      .eq("id", id)
-      .select();
+      .eq("id", id);
 
     if (error) {
       return res.status(500).json({ error: error.message });
     }
 
     return res.status(201).json({
-      message: "Comment added successfully",
-      data: data[0],
+      message: "Comment added successfully"
     });
 
   } catch (error) {

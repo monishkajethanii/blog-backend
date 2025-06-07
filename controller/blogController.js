@@ -68,18 +68,17 @@ const updateBlog = async (req, res) => {
       .from("blogs")
       .update({ title, author, content, tags })
       .eq("id", id)
-      .select();
+      .single()
 
     if (error) {
       return res.status(500).json({ error: error.message });
     }
 
     return res.status(200).json({
-      message: "Blog updated successfully",
-      data: data[0],
+      message: "Blog updated successfully"
     });
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
     return res.status(500).json({ error: "Internal server error" });
   }
 };
